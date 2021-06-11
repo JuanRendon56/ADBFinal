@@ -13,7 +13,7 @@ include("conexion.php");
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-	<title>La Proveedora | Libros</title>
+	<title>La Proveedora | Editoriales</title>
 	<style>
 		.content {
 			margin-top: 80px;
@@ -31,10 +31,10 @@ include("conexion.php");
 
 			<div class="row">
 				<div class="col">
-					<h2>Librería</h2>
+					<h2>Editoriales</h2>
 				</div>
 				<div class="col col-md-auto">
-					<a class="btn btn-outline-dark" href="addB.php">Añadir nuevo libro</a>
+					<a class="btn btn-outline-dark" href="addP.php">Añadir nueva editorial</a>
 				</div>
 			</div>
 
@@ -43,11 +43,11 @@ include("conexion.php");
 			<?php
 			if(isset($_GET['aksi']) == 'delete'){
 				$nik = mysqli_real_escape_string($bks,(strip_tags($_GET["nik"],ENT_QUOTES)));
-				$cek = mysqli_query($bks, "SELECT * FROM book WHERE id_book='$nik'");
+				$cek = mysqli_query($bks, "SELECT * FROM publisher WHERE id_publisher='$nik'");
 				if(mysqli_num_rows($cek) == 0){
 					echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> No se encontraron datos.</div>';
 				}else{
-					$delete = mysqli_query($bks, "DELETE FROM book WHERE id_book='$nik'");
+					$delete = mysqli_query($bks, "DELETE FROM publisher WHERE id_publisher='$nik'");
 					if($delete){
 						echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Datos eliminado correctamente.</div>';
 					}else{
@@ -63,17 +63,11 @@ include("conexion.php");
 			<div class="table-responsive">
 			<table class="table table-striped table-hover">
 				<tr>
-          			<th>ISBN</th>
-					<th>Título del libro</th>
-					<th>ID del Autor</th>
-					<th>Edición</th>
-					<th>ID de la Editorial</th>
-					<th>Fecha de publicación</th>
-					<th>ID del género</th>
-					<th>Precio</th>
+					<th>ID de la editorial</th>
+					<th>Nombre de la editorial</th>
 				</tr>
 				<?php
-					$sql = mysqli_query($bks, "SELECT * FROM book ORDER BY id_book ASC");
+					$sql = mysqli_query($bks, "SELECT * FROM publisher ORDER BY id_publisher ASC");
 					if(mysqli_num_rows($sql) == 0){
 						echo '<tr><td colspan="8">No hay datos.</td></tr>';
 					}
@@ -81,22 +75,16 @@ include("conexion.php");
 						while($row = mysqli_fetch_assoc($sql)){
 							echo '
 							<tr>
-								<td>'.$row['isbn'].'</td>
-								<td>'.$row['title'].'</a></td>
-								<td>'.$row['id_authos'].'</td>
-								<td>'.$row['edition'].'</td>
-								<td>'.$row['id_publisher'].'</a></td>
-								<td>'.$row['publication_date'].'</a></td>
-								<td>'.$row['id_genre'].'</td>
-								<td>'.$row['price'].'</td>
+								<td>'.$row['id_publisher'].'</td>
+								<td>'.$row['name_publisher'].'</td>
 								<td>
-									<a href="profileB.php?nik='.$row['id_book'].'" title="Ver detalles" class="btn btn-primary btn-sm">Ver detalles</a>
-									<a href="editB.php?nik='.$row['id_book'].'" title="Editar datos" class="btn btn-primary btn-sm">Editar</a>
-									<a href="listB.php?aksi=delete&nik='.$row['id_book'].'" title="Eliminar" onclick="return confirm(\'Esta seguro de borrar los datos '.$row['title'].'?\')" class="btn btn-danger btn-sm">Eliminar</a>
+									<a href="profileP.php?nik='.$row['id_publisher'].'" title="Ver detalles" class="btn btn-primary btn-sm">Ver detalles</a>
+									<a href="editP.php?nik='.$row['id_publisher'].'" title="Editar datos" class="btn btn-primary btn-sm">Editar</a>
+									<a href="listP.php?aksi=delete&nik='.$row['id_publisher'].'" title="Eliminar" onclick="return confirm(\'Esta seguro de borrar los datos '.$row['name_publisher'].'?\')" class="btn btn-danger btn-sm">Eliminar</a>
 								</td>
 							</tr>
 							';
-							$id_book++;
+							$id_publisher++;
 						}
 					}
 				?>

@@ -84,9 +84,9 @@
         <button class="nav-item nav-link" href="#">Biblioteca</button>
         <div class="dropdown-content">
           <a class="dropdown-item" href="listB.php">Libros</a>
-          <a class="dropdown-item" href="#">Autores</a>
-          <a class="dropdown-item" href="#">Editoriales</a>
-          <a class="dropdown-item" href="#">Géneros</a>
+          <a class="dropdown-item" href="listA.php">Autores</a>
+          <a class="dropdown-item" href="listP.php">Editoriales</a>
+          <a class="dropdown-item" href="listG.php">Géneros</a>
         </div>
       </div> 
     </div>

@@ -31,7 +31,17 @@ include("conexion.php");
 
 	<div class="container">
 		<div class="content">
-			<h2>Papelería</h2>
+
+			<div class="row">
+				<div class="col">
+					<h2>Papelería</h2>
+				</div>
+				<div class="col col-md-auto">
+					<a class="btn btn-outline-dark" href="addS.php">Añadir nuevo producto</a>
+				</div>
+			</div>
+
+
 			<hr />
 
 			<?php
@@ -57,22 +67,19 @@ include("conexion.php");
 			<div class="table-responsive">
 			<table class="table table-striped table-hover">
 				<tr>
-          <th>Id</th>
 					<th>Nombre</th>
 					<th>Precio</th>
-          <th>Cantidad</th>
-          <th>Acciones</th>
+					<th>Cantidad</th>
+					<th>Acciones</th>
 				</tr>
 				<?php
 					$sql = mysqli_query($stt, "SELECT * FROM product ORDER BY id_product ASC");
 				if(mysqli_num_rows($sql) == 0){
 					echo '<tr><td colspan="8">No hay datos.</td></tr>';
 				}else{
-					$id_product = 1;
 					while($row = mysqli_fetch_assoc($sql)){
 						echo '
 						<tr>
-							<td>'.$row['id_product'].'</td>
 							<td>'.$row['name'].'</a></td>
 							<td>'.$row['price'].'</td>
 							<td>'.$row['quantity'].'</td>

@@ -12,7 +12,7 @@ include("conexion.php");
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-	<title>La Proveedora | Detalles del libro</title>
+	<title>La Proveedora | Detalles de la editorial</title>
 
 	<style>
 		.content {
@@ -27,67 +27,43 @@ include("conexion.php");
 
 	<div class="container">
 		<div class="content">
-			<h2>Información del libro</h2>
+			<h2>Información de la editorial</h2>
 			<hr />
 
 			<?php
 			$nik = mysqli_real_escape_string($bks,(strip_tags($_GET["nik"],ENT_QUOTES)));
 
-			$sql = mysqli_query($bks, "SELECT * FROM book WHERE id_book='$nik'");
+			$sql = mysqli_query($bks, "SELECT * FROM publisher WHERE id_publisher='$nik'");
 			if(mysqli_num_rows($sql) == 0){
-				header("Location: listB.php");
+				header("Location: listP.php");
 			}else{
 				$row = mysqli_fetch_assoc($sql);
 			}
 
 			if(isset($_GET['aksi']) == 'delete'){
-				$delete = mysqli_query($bks, "DELETE FROM book WHERE id_book='$nik'");
+				$delete = mysqli_query($bks, "DELETE FROM publisher WHERE id_publisher='$nik'");
 				if($delete){
-					echo '<div class="alert alert-danger alert-dismissable">><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Libro borrado con éxito.</div>';
+					echo '<div class="alert alert-danger alert-dismissable">><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Autor borrado con éxito.</div>';
 				}else{
-					echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>No se pudo eliminar el libro.</div>';
+					echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>No se pudo eliminar e la editorial.</div>';
 				}
 			}
 			?>
 
 			<table class="table table-striped table-condensed">
 				<tr>
-					<th>ISBN</th>
-					<td><?php echo $row['isbn']; ?></td>
-				</tr>
-				<tr>
-					<th>Titulo del libro</th>
-					<td><?php echo $row['title']; ?></td>
-				</tr>
-				<tr>
-					<th>ID del autor</th>
-					<td><?php echo $row['id_author']; ?></td>
-				</tr>
-				<tr>
-					<th>Edición</th>
-					<td><?php echo $row['edition']; ?></td>
-				</tr>
-				<tr>
 					<th>ID de la editorial</th>
 					<td><?php echo $row['id_publisher']; ?></td>
 				</tr>
 				<tr>
-					<th>Fecha de publicación</th>
-					<td><?php echo $row['publication_date']; ?></td>
-				</tr>
-				<tr>
-					<th>ID del género</th>
-					<td><?php echo $row['id_genre']; ?></td>
-				</tr>
-				<tr>
-					<th>Precio</th>
-					<td><?php echo $row['price']; ?></td>
+					<th>Nombre de la editorial</th>
+					<td><?php echo $row['name_publisher']; ?></td>
 				</tr>
 			</table>
 
-			<a href="listB.php" class="btn btn-sm btn-info">Regresar</a>
-			<a href="editB.php?nik=<?php echo $row['nik']; ?>" class="btn btn-sm btn-success">Editar datos</a>
-			<a href="profileB.php?aksi=delete&nik=<?php echo $row['nik']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Esta seguro de borrar los datos <?php echo $row['title']; ?>')">Eliminar</a>
+			<a href="listP.php" class="btn btn-sm btn-info">Regresar</a>
+			<a href="editP.php?nik=<?php echo $row['nik']; ?>" class="btn btn-sm btn-success">Editar datos</a>
+			<a href="profileP.php?aksi=delete&nik=<?php echo $row['nik']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Esta seguro de borrar los datos <?php echo $row['name_publisher']; ?>')">Eliminar</a>
 		</div>
 	</div>
 </body>

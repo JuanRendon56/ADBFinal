@@ -25,6 +25,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `author`
+--
+
+CREATE TABLE `author` (
+  `id_author` int NOT NULL,
+  `name_author` varchar(30) NOT NULL,
+  `lastname_author` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Table structure for table `genre`
+--
+
+CREATE TABLE `genre` (
+  `id_genre` int NOT NULL,
+  `name_genre` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Table structure for table `publisher`
+--
+
+CREATE TABLE `publisher` (
+  `id_publisher` int NOT NULL,
+  `name_publisher` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+--
 -- Table structure for table `book`
 --
 
@@ -45,6 +74,26 @@ CREATE TABLE `book` (
 --
 
 --
+-- Indexes for table `author`
+--
+ALTER TABLE `author`
+  ADD PRIMARY KEY (`id_author`);
+
+--
+-- Indexes for table `genre`
+--
+ALTER TABLE `genre`
+  ADD PRIMARY KEY (`id_genre`);
+
+--
+-- Indexes for table `publisher`
+--
+ALTER TABLE `publisher`
+  ADD PRIMARY KEY (`id_publisher`);
+
+
+
+--
 -- Indexes for table `book`
 --
 ALTER TABLE `book`
@@ -56,6 +105,24 @@ ALTER TABLE `book`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `genre`
+--
+ALTER TABLE `genre`
+  MODIFY `id_genre` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `author`
+--
+ALTER TABLE `author`
+  MODIFY `id_author` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `publisher`
+--
+ALTER TABLE `publisher`
+  MODIFY `id_publisher` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `book`

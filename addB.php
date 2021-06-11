@@ -44,7 +44,7 @@ include("conexion.php");
 				$cek = mysqli_query($bks, "SELECT * FROM book WHERE id_book='$id_book'");
 				if(mysqli_num_rows($cek) == 0){
 						$insert = mysqli_query($bks, "INSERT INTO book(isbn, title, id_author, edition, id_publisher, publication_date, id_genre, price, id_book)
-															VALUES('$isbn',,'$title','$id_author','$edition','$id_publisher','$publication_date','$id_genre','$price','$id_book')") or die(mysqli_error());
+															VALUES('$isbn','$title','$id_author','$edition','$id_publisher','$publication_date','$id_genre','$price','$id_book')") or die(mysqli_error());
 						if($insert){
 							echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Los datos han sido guardados con éxito.</div>';
 						}else{
